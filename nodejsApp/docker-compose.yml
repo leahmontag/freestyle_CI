@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nodejs-app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - DATABASE_CONNECTIONSTRING=mongodb://mongodb:27017/pucsd
+    depends_on:
+      - mongodb
+  
+  
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb-data:/data/db  # Map a local directory to /data/db in the MongoDB container
